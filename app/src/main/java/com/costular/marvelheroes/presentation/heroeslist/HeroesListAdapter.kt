@@ -4,6 +4,7 @@ import android.app.VoiceInteractor
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.support.v4.content.ContextCompat
 import android.support.v7.graphics.Palette
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -72,6 +73,16 @@ class HeroesListAdapter(val clickListener: Click):  RecyclerView.Adapter<HeroesL
 
                 heroTitle.text = item.name
                 setOnClickListener { clickListener(item, heroImage) }
+
+                favourite.setOnClickListener {
+
+                    if (favourite.background.constantState == ContextCompat.getDrawable(context, R.drawable.fav_off)?.constantState) {
+                        favourite.setBackgroundResource(R.drawable.fav_on)
+                    } else {
+                        favourite.setBackgroundResource(R.drawable.fav_off)
+                    }
+                }
+               // setOnClickListener { clickListener(item, heroImage) }
             }
         }
 

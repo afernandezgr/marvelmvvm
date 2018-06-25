@@ -22,10 +22,10 @@ class MarvelHeroMapper : Mapper<MarvelHero, MarvelHeroEntity> {
             inputList.map { transform(it) }
 
 
-    private fun getGroupsFromMarvelHero(marvelHero: MarvelHero): Array<String> =
-            marvelHero.groups.replace("\\s".toRegex(), "")
-                    .split(",")
-                    .toTypedArray()
-                   // .toCollection(ArrayList<String>())
-
+    private fun getGroupsFromMarvelHero(marvelHero: MarvelHero): ArrayList<String> {
+       return marvelHero.groups.replace("\\s".toRegex(), "")
+                .split(",")
+                .toTypedArray()
+                .toCollection(ArrayList<String>())
+    }
 }
