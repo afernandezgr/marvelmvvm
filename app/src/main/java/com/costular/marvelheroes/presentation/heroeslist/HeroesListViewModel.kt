@@ -14,14 +14,14 @@ class HeroesListViewModel @Inject constructor(
         private val getMarvelHeroesList: GetMarvelHeroesList) : BaseViewModel() {
 
     val heroesListState: MutableLiveData<List<MarvelHeroEntity>> = MutableLiveData()
-    val isLoagingState: MutableLiveData<Boolean> = MutableLiveData()
+    val isLoadingState: MutableLiveData<Boolean> = MutableLiveData()
 
     fun loadMarvelHeroes() {
         getMarvelHeroesList.marvelHeroesRepositoryImpl.getMarvelHeroesList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { isLoagingState.postValue(true) }
-                .doOnTerminate { isLoagingState.postValue(false) }
+                .doOnSubscribe { isLoadingState.postValue(true) }
+                .doOnTerminate { isLoadingState.postValue(false) }
                 .subscribeBy (
                         onNext = {
                             heroesListState.value = it
@@ -33,4 +33,10 @@ class HeroesListViewModel @Inject constructor(
                 .addTo(compositeDisposable)
 
     }
+
+    fun updateHero(hero: MarvelHeroEntity) {
+        getMarvelHeroesList.marvelHeroesRepositoryImpl.updateHero(hero)
+
+    }
+
 }

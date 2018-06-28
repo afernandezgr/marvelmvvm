@@ -8,6 +8,6 @@ import com.costular.marvelheroes.domain.model.MarvelHeroEntity
 @Database(entities = [MarvelHeroEntity::class], version = 1)
 abstract class HeroesDatabase : RoomDatabase() {
 
-    abstract fun getHeroesDao(): HeroesDao
+    abstract fun heroesDao(): HeroesDao
 
 }

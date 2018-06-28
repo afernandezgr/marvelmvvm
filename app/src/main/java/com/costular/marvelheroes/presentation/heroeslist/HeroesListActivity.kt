@@ -34,6 +34,7 @@ class HeroesListActivity : AppCompatActivity() {
         setUpVM()
     }
 
+
     fun inject() {
         DaggerGetMarvelHeroesListComponent.builder()
                 .applicationComponent((application as MainApp).component)
@@ -48,7 +49,7 @@ class HeroesListActivity : AppCompatActivity() {
     }
 
     private fun bindEvents() {
-        heroesListViewModel.isLoagingState.observe(this, Observer { isLoading ->
+        heroesListViewModel.isLoadingState.observe(this, Observer { isLoading ->
             isLoading?.let {
                 showLoading(it)
             }
@@ -62,10 +63,16 @@ class HeroesListActivity : AppCompatActivity() {
     }
 
     private fun setUpRecycler() {
-        adapter = HeroesListAdapter { hero, image -> goToHeroDetail(hero, image) }
+        adapter = HeroesListAdapter ({ hero, image -> goToHeroDetail(hero, image)},
+                                     { hero -> updateHero(hero)})
+
         heroesListRecycler.layoutManager = GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false)
         heroesListRecycler.itemAnimator = DefaultItemAnimator()
         heroesListRecycler.adapter = adapter
+    }
+
+    private fun updateHero(hero:MarvelHeroEntity){
+        heroesListViewModel.updateHero(hero)
     }
 
     private fun goToHeroDetail(hero: MarvelHeroEntity, image: View) {

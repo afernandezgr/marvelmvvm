@@ -22,5 +22,6 @@ data class MarvelHeroEntity(
         val power: String,
         val abilities: String,
         @Embedded
-        val groups: ArrayList<String>?
+        val groups: ArrayList<String>?,
+        var favourite: Boolean
 ) : Parcelable

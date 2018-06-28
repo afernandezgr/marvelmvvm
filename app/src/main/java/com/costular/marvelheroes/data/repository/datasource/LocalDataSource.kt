@@ -11,13 +11,21 @@ class LocalDataSource(private val heroesDatabase: HeroesDatabase) {
 
     fun getLocalMarvelHeroesList(): Flowable<List<MarvelHeroEntity>> =
             heroesDatabase
-                    .getHeroesDao()
+                    .heroesDao()
                     .getAllHeroes()
                     .toFlowable()
 
     fun saveHeroes(heroes: List<MarvelHeroEntity>) {
         Observable.fromCallable {
-            heroesDatabase.getHeroesDao().removeAndInsertHeroes(heroes)
+            heroesDatabase.heroesDao().insertAll(heroes)
+        }
+                .subscribeOn(Schedulers.io())
+                .subscribe()
+    }
+
+    fun updateHero(hero: MarvelHeroEntity){
+        Observable.fromCallable {
+            heroesDatabase.heroesDao().updateHero(hero)
         }
                 .subscribeOn(Schedulers.io())
                 .subscribe()

@@ -11,16 +11,13 @@ abstract class HeroesDao {
     @Query("SELECT * FROM heroes")
     abstract fun getAllHeroes(): Maybe<List<MarvelHeroEntity>>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract fun insertAll(heroes: List<MarvelHeroEntity>)
 
     @Query("DELETE FROM heroes")
     abstract fun deleteAllHeroes()
 
-    @Transaction
-    open fun removeAndInsertHeroes(heroes: List<MarvelHeroEntity>) {
-        deleteAllHeroes()
-        insertAll(heroes)
-    }
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun updateHero(hero: MarvelHeroEntity)
 
 }

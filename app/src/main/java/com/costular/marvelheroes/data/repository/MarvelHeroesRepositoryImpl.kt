@@ -15,6 +15,20 @@ class MarvelHeroesRepositoryImpl(private val localDataSource: LocalDataSource,
     : MarvelHeroesRepository {
 
 
+  override fun getMarvelHeroesList(): Observable<List<MarvelHeroEntity>> =
+            getHeroesWS().concatWith(getHeroesDB())
+
+    private fun getHeroesDB(): Observable<List<MarvelHeroEntity>> =
+            localDataSource.getLocalMarvelHeroesList()
+                    .toObservable()
+
+    private fun getHeroesWS(): Observable<List<MarvelHeroEntity>> =
+            remoteMarvelHeroesDataSource
+                    .getMarvelHeroesList()
+                    .map { marvelHeroesMapper.transformList(it) }
+                    .doOnNext { localDataSource.saveHeroes(it) }
+
+/*
     override fun getMarvelHeroesList(): Observable<List<MarvelHeroEntity>> =
             localDataSource.getLocalMarvelHeroesList()
                            .toObservable()
@@ -22,5 +36,10 @@ class MarvelHeroesRepositoryImpl(private val localDataSource: LocalDataSource,
                            .getMarvelHeroesList()
                            .map { marvelHeroesMapper.transformList(it) }
                            .doOnNext { localDataSource.saveHeroes(it) })
+*/
 
+
+    override fun updateHero(hero:MarvelHeroEntity) {
+            localDataSource.updateHero(hero)
+    }
 }
