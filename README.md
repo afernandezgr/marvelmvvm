@@ -13,7 +13,7 @@ Marvel Heroes es una app para Android que muestra algunos de los súperheroes de
 - Dagger2
 - Room
 - LiveData
--
+
 
 ## Notas 📝
 
