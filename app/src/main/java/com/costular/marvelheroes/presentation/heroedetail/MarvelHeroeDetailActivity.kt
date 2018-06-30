@@ -10,16 +10,22 @@ import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.costular.marvelheroes.R
+import com.costular.marvelheroes.data.repository.MarvelHeroesRepositoryImpl
 import com.costular.marvelheroes.domain.model.MarvelHeroEntity
 import kotlinx.android.synthetic.main.activity_hero_detail.*
+import javax.inject.Inject
 
 class MarvelHeroeDetailActivity : AppCompatActivity() {
+
 
     companion object {
         const val PARAM_HEROE = "heroe"
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hero_detail)
         supportActionBar?.apply {
@@ -31,6 +37,9 @@ class MarvelHeroeDetailActivity : AppCompatActivity() {
         val hero: MarvelHeroEntity? = intent?.extras?.getParcelable(PARAM_HEROE)
         hero?.let { fillHeroData(it) }
     }
+
+
+
 
     private fun fillHeroData(hero: MarvelHeroEntity) {
         Glide.with(this)
@@ -53,6 +62,9 @@ class MarvelHeroeDetailActivity : AppCompatActivity() {
         heroDetailHeight.text = hero.height
         heroDetailPower.text = hero.power
         heroDetailAbilities.text = hero.abilities
+        setIconFavourite(hero)
+
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -62,6 +74,16 @@ class MarvelHeroeDetailActivity : AppCompatActivity() {
                 true
             }
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+
+    fun setIconFavourite(hero: MarvelHeroEntity){
+        if (hero.favourite) {
+            heroDetailFavourite.setBackgroundResource(R.drawable.fav_on)
+        }
+        else {
+            heroDetailFavourite.setBackgroundResource(R.drawable.fav_off)
         }
     }
 

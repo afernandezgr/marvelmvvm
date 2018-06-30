@@ -17,21 +17,45 @@
         android:layout_height="wrap_content"
         android:transitionName="@string/image_transition" />
 
-    <TextView
-        android:id="@+id/heroDetailName"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Iron Man"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        style="@style/HeroDetailName" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/heroDetailRealName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Anthony Edward 'Tony' Stark"
-        style="@style/HeroDetailRealName" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/heroDetailName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Iron Man"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                style="@style/HeroDetailName" />
+
+            <TextView
+                android:id="@+id/heroDetailRealName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Anthony Edward 'Tony' Stark"
+                style="@style/HeroDetailRealName" />
+
+        </LinearLayout>
+
+    <Button
+        android:id="@+id/heroDetailFavourite"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="right|bottom"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/fav_off" />
+
+</LinearLayout>
+
+
 
     <TextView
         android:id="@+id/heroDetailHeight"

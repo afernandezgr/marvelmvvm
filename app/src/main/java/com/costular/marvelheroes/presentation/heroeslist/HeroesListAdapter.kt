@@ -79,17 +79,8 @@ class HeroesListAdapter(val clickListener: Click, val clickFavouriteListener: Cl
                 //Management of favourite icon (star)
                 favourite.setOnClickListener {
 
-                   item.favourite = !item.favourite
+                    item.favourite = !item.favourite
                     setIconFavourite(itemView,item)
-
-                   /*  if (favourite.background.constantState == ContextCompat.getDrawable(context, R.drawable.fav_off)?.constantState) {
-                        favourite.setBackgroundResource(R.drawable.fav_on)
-                        item.favourite = true
-                    } else {
-                        favourite.setBackgroundResource(R.drawable.fav_off)
-                        item.favourite = false
-                    }*/
-
                     clickFavouriteListener(item)
                 }
 
