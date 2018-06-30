@@ -13,6 +13,7 @@ Marvel Heroes es una app para Android que muestra algunos de los súperheroes de
 - Dagger2
 - Room
 - LiveData
+-
 
 ## Notas 📝
 
@@ -26,6 +27,6 @@ Marvel Heroes es una app para Android que muestra algunos de los súperheroes de
 
 - Se ha utilizado [Android KTX](https://github.com/android/android-ktx) para añadir ciertas extension functions muy interesantes y útiles para el desarrollo. Algunas como `Context.toast()` no están en el repositorio de Maven en el momento que se desarrolla esta app; aunque sí que lo está en el repositorio de GitHub.
 
--  Emplea [Room](https://developer.android.com/topic/libraries/architecture/room.html) para persistir los datos en base de datos. El Repository gestiona los datos recuperados desde webservice y a su vez lo cachea en base de datos. o cualquier otro DAO/ORM para mostrar un ejemplo claro de Repository.
+-  Emplea [Room](https://developer.android.com/topic/libraries/architecture/room.html) para persistir los datos en base de datos. Repository gestiona los datos recuperados desde webservice y a su vez lo cachea en base de datos.
 
 - Podría y debería haber más tests
